@@ -4,9 +4,9 @@ export function Header() {
             <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
                 {/* Logo - matches social media branding */}
                 <a href="/" className="flex items-baseline text-[#003057]">
-                    <span className="text-xl font-semibold tracking-tight">freight</span>
-                    <span className="text-xl font-light tracking-tight">code</span>
-                    <span className="text-[10px] font-normal ml-0.5 -translate-y-2">®</span>
+                    <span className="text-2xl font-semibold tracking-tight">freight</span>
+                    <span className="text-2xl font-light tracking-tight">code</span>
+                    <span className="text-[12px] font-normal ml-0.5 -translate-y-2.5">®</span>
                 </a>
 
                 {/* Nav links */}
@@ -16,6 +16,9 @@ export function Header() {
                     </a>
                     <a href="#pricing" className="text-sm text-gray-600 hover:text-[#003057] transition-colors">
                         Pricing
+                    </a>
+                    <a href="/tools" className="text-sm text-gray-600 hover:text-[#003057] transition-colors">
+                        Tariff Refund Estimator
                     </a>
                     <a href="#georisk" className="text-sm text-[#003057] font-medium hover:text-[#003057] transition-colors">
                         GeoRisk Navigator™

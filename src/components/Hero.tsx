@@ -30,6 +30,7 @@ export function Hero() {
                         </p>
 
                         {/* Email input + CTA */}
+                        {/* Email input + CTA */}
                         <div className="flex flex-col sm:flex-row gap-3 mb-4">
                             <input
                                 type="email"

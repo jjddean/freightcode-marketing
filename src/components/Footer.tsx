@@ -1,3 +1,5 @@
+
+
 export function Footer() {
     return (
         <footer className="py-12 px-6 bg-white border-t border-gray-200">
@@ -5,10 +7,12 @@ export function Footer() {
                 <div className="grid grid-cols-2 md:grid-cols-7 gap-6 mb-10">
                     {/* Logo / About */}
                     <div className="col-span-2 md:col-span-1">
-                        <div className="mb-3 flex items-baseline text-[#003057]">
-                            <span className="text-2xl font-semibold tracking-tight">freight</span>
-                            <span className="text-2xl font-light tracking-tight">code</span>
-                            <span className="text-[12px] font-normal ml-0.5 -translate-y-2.5">®</span>
+                        <div className="mb-3">
+                            <div className="flex items-baseline whitespace-nowrap text-[#003057]">
+                                <span className="font-bold tracking-tight text-[22px]">freight</span>
+                                <span className="font-normal tracking-tight text-[22px]">code</span>
+                                <span className="font-normal text-[13px] -translate-y-[5px] ml-[-1px]">®</span>
+                            </div>
                         </div>
                         <p className="text-gray-500 text-xs leading-relaxed">
                             Freight operations software for<br />complex trade lanes.

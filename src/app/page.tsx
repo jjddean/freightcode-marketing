@@ -2,10 +2,10 @@ import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
 import { ProductDemo } from '@/components/ProductDemo';
 import { Features } from '@/components/Features';
-import { TariffCalculator } from '@/components/tools/TariffCalculator';
-import { FullModeSimulator } from '@/components/tools/FullModeSimulator';
+
 import { Pricing } from '@/components/Pricing';
 import { Footer } from '@/components/Footer';
+import { GeoRiskSection } from '@/components/GeoRiskSection';
 
 export default function Home() {
   const productVideoId = '';
@@ -21,6 +21,8 @@ export default function Home() {
       <section id="demo" className="bg-white">
         <ProductDemo videoId={productVideoId} />
       </section>
+
+      <GeoRiskSection />
 
       <section id="capabilities" className="bg-white">
         <Features />
@@ -56,7 +58,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="text-white font-bold text-lg mb-1">Instant Estimation</h4>
-                    <p className="text-slate-500 text-sm font-medium leading-relaxed">No HTS codes required for a baseline recovery estimate in seconds.</p>
+                    <p className="text-slate-400 text-sm font-medium leading-relaxed">No HTS codes required for a baseline recovery estimate in seconds.</p>
                   </div>
                 </div>
 
@@ -66,17 +68,17 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="text-white font-bold text-lg mb-1">Granular Verification</h4>
-                    <p className="text-slate-500 text-sm font-medium leading-relaxed">Run simulations against specific commodity codes and entry dates.</p>
+                    <p className="text-slate-400 text-sm font-medium leading-relaxed">Run simulations against specific commodity codes and entry dates.</p>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-20 border-t border-slate-800">
+              <div className="pt-10 border-t border-slate-800">
                 <div className="inline-flex items-center px-3 py-1 bg-[#1e3a5f] rounded-full mb-6">
                   <span className="text-cyan-400 text-xs font-medium">Deep Forensic Auditing</span>
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold text-white mb-4">Verification & Evidence</h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-8 font-medium">
+                <p className="text-slate-400 text-base leading-relaxed mb-8 font-medium">
                   Run high-fidelity simulations that cross-reference your specific HTS codes against established litigation timelines.
                 </p>
 
@@ -86,8 +88,8 @@ export default function Home() {
                       <svg className="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
                     </div>
                     <div>
-                      <h5 className="text-white font-bold text-sm">Precision Windowing</h5>
-                      <p className="text-slate-500 text-xs leading-relaxed">Automatic verification against exact CIT court entry date eligibility.</p>
+                      <h5 className="text-white font-bold text-base">Precision Windowing</h5>
+                      <p className="text-slate-400 text-sm leading-relaxed">Automatic verification against exact CIT court entry date eligibility.</p>
                     </div>
                   </div>
                   <div className="flex gap-4 items-start">
@@ -95,31 +97,32 @@ export default function Home() {
                       <svg className="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" /></svg>
                     </div>
                     <div>
-                      <h5 className="text-white font-bold text-sm">Evidence Packaging</h5>
-                      <p className="text-slate-500 text-xs leading-relaxed">Generated reports ready for forensic broker audit and 7501 filing.</p>
+                      <h5 className="text-white font-bold text-base">Evidence Packaging</h5>
+                      <p className="text-slate-400 text-sm leading-relaxed">Generated reports ready for forensic broker audit and 7501 filing.</p>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-slate-500 text-[11px] italic max-w-[400px] mt-12 leading-relaxed font-medium">
+                <p className="text-slate-500 text-xs italic max-w-[400px] mt-12 leading-relaxed font-medium">
                   *Our calculations align with the latest Section 301 litigation outcomes in the CIT. Actual recovery requires
                   verified 7501 entry data processed by a licensed broker.
                 </p>
               </div>
             </div>
 
-            {/* Right: The Calculator Stack */}
-            <div className="space-y-12">
-              <TariffCalculator />
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                  <div className="w-full border-t border-slate-800/50"></div>
-                </div>
-                <div className="relative flex justify-center">
-                  <span className="bg-[#0a1628] px-4 text-xs font-bold text-slate-600 uppercase tracking-widest">or run granular simulation</span>
-                </div>
-              </div>
-              <FullModeSimulator />
+            {/* Right: CTA to Tool */}
+            {/* Right: Simple Link */}
+            <div className="flex flex-col justify-center items-start space-y-6">
+              <p className="text-slate-400 text-lg leading-relaxed">
+                Instantly estimate your potential refunds on Section 301 tariffs. Our calculator helps identify recovery opportunities for China-origin goods.
+              </p>
+              <a
+                href="/tools"
+                className="group inline-flex items-center text-cyan-400 font-semibold hover:text-cyan-300 transition-colors"
+              >
+                Open Tariff Calculator →
+                <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-cyan-400 ease-in-out absolute bottom-0 left-0"></span>
+              </a>
             </div>
           </div>
         </div>

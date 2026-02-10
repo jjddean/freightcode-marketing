@@ -1,4 +1,4 @@
-import { GeoRiskDemoVideo } from './GeoRiskDemoVideo';
+
 
 const capabilities = [
     'Sanctions Exposure',
@@ -27,7 +27,7 @@ export function GeoRiskSection() {
                         </p>
 
                         <p className="text-gray-500 text-sm mb-6 leading-relaxed">
-                            Watch a short walkthrough showing how Freightcode evaluates risk along the actual freight
+                            See how Freightcode evaluates risk along the actual freight
                             route, identifies critical choke points, and provides operational guidance before cargo is in transit.
                         </p>
 
@@ -48,8 +48,19 @@ export function GeoRiskSection() {
                         </p>
                     </div>
 
-                    {/* Right: Video */}
-                    <GeoRiskDemoVideo />
+                    {/* Right: Image */}
+                    <div className="w-full">
+                        <div className="relative w-full overflow-hidden rounded-2xl bg-white shadow-sm">
+                            <img
+                                src="/georisk-preview.png"
+                                alt="GeoRisk Navigator Dashboard"
+                                className="object-contain w-full h-auto max-h-[600px]"
+                            />
+                        </div>
+                        <p className="mt-3 text-sm text-gray-400 text-center">
+                            Route-level risk detection and operational guidance.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>

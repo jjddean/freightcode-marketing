@@ -2,9 +2,7 @@
 
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { TariffCalculator } from '@/components/tools/TariffCalculator';
-import { FullModeSimulator } from '@/components/tools/FullModeSimulator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { TariffUnifiedTool } from '@/components/tools/TariffUnifiedTool';
 
 export default function ToolsPage() {
     return (
@@ -30,35 +28,11 @@ export default function ToolsPage() {
 
             <section className="py-20 px-6 relative">
                 <div className="max-w-4xl mx-auto">
-                    <Tabs defaultValue="simplified" className="w-full">
-                        <div className="flex justify-center mb-16">
-                            <TabsList className="bg-[#0d1f35] p-1.5 rounded-xl border border-slate-700 flex gap-1">
-                                <TabsTrigger value="simplified" className="px-8 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest data-[state=active]:bg-cyan-500 data-[state=active]:text-[#0a1628] text-slate-400 transition-all focus:outline-none">
-                                    Simplified Mode
-                                </TabsTrigger>
-                                <TabsTrigger value="full" className="px-8 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest data-[state=active]:bg-cyan-500 data-[state=active]:text-[#0a1628] text-slate-400 transition-all focus:outline-none">
-                                    Full Audit Sim
-                                </TabsTrigger>
-                            </TabsList>
+                    <section className="py-20 px-6 relative">
+                        <div className="max-w-4xl mx-auto">
+                            <TariffUnifiedTool />
                         </div>
-
-                        <TabsContent value="simplified" className="animate-in fade-in zoom-in-95 duration-300">
-                            <div className="grid grid-cols-1 gap-12 items-start">
-                                <TariffCalculator />
-                                <div className="max-w-lg mx-auto text-center space-y-6 pt-12 border-t border-slate-800">
-                                    <h3 className="text-cyan-400 font-bold uppercase tracking-[0.2em] text-[10px]">How it works</h3>
-                                    <p className="text-slate-500 text-sm leading-relaxed">
-                                        Our baseline estimate uses a conservative 25% average tariff rate and 90% eligibility factor
-                                        to provide a strategic overview of your potential recovery before you commit to a full audit.
-                                    </p>
-                                </div>
-                            </div>
-                        </TabsContent>
-
-                        <TabsContent value="full" className="animate-in fade-in zoom-in-95 duration-300">
-                            <FullModeSimulator />
-                        </TabsContent>
-                    </Tabs>
+                    </section>
                 </div>
             </section>
 

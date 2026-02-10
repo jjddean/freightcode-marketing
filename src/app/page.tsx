@@ -110,19 +110,37 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right: CTA to Tool */}
-            {/* Right: Simple Link */}
-            <div className="flex flex-col justify-center items-start space-y-6">
-              <p className="text-slate-400 text-lg leading-relaxed">
-                Instantly estimate your potential refunds on Section 301 tariffs. Our calculator helps identify recovery opportunities for China-origin goods.
+            {/* Right: Tariff Calculator CTA */}
+            <div className="flex flex-col justify-center items-start gap-6 lg:pt-6">
+              <div className="w-full rounded-2xl border border-slate-800 bg-slate-900/50 p-6 shadow-[0_20px_60px_rgba(3,10,24,0.35)]">
+                <div className="inline-flex items-center px-3 py-1 bg-[#1e3a5f] rounded-full mb-4">
+                  <span className="text-cyan-300 text-xs font-medium">Tariff Refund Estimator</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Quantify Section 301 Exposure</h3>
+                <p className="text-slate-400 text-base leading-relaxed">
+                  Estimate refund potential across China-origin imports using industry‑standard recovery assumptions.
+                  Use this to prioritize audits before you pull entry data or broker records.
+                </p>
+
+                <ul className="mt-5 space-y-3 text-sm text-slate-400">
+                  <li>• Baseline estimate from total import value (no HTS required)</li>
+                  <li>• Supports Section 301 and IEEPA scenarios</li>
+                  <li>• Designed for forwarders, brokers, and in‑house trade teams</li>
+                </ul>
+
+                <div className="mt-6 flex flex-wrap items-center gap-4">
+                  <a
+                    href="/tools"
+                    className="inline-flex items-center justify-center h-11 px-5 rounded-lg bg-cyan-500 text-slate-900 font-semibold hover:bg-cyan-400 transition-colors"
+                  >
+                    Open Tariff Calculator
+                  </a>
+                </div>
+              </div>
+
+              <p className="text-slate-500 text-xs leading-relaxed max-w-md">
+                Estimates are directional only. Final eligibility depends on HTS classification, entry dates, and ongoing CIT rulings.
               </p>
-              <a
-                href="/tools"
-                className="group inline-flex items-center text-cyan-400 font-semibold hover:text-cyan-300 transition-colors"
-              >
-                Open Tariff Calculator →
-                <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-cyan-400 ease-in-out absolute bottom-0 left-0"></span>
-              </a>
             </div>
           </div>
         </div>

@@ -42,12 +42,6 @@ export const FullModeSimulator = () => {
     return (
         <Card className="max-w-md mx-auto !bg-[#0d1f35] border-slate-700 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] rounded-2xl overflow-hidden">
             <CardHeader className="!bg-[#0a1628]/50 text-white py-6 px-8 relative border-b border-slate-700/50">
-                <div className="absolute top-4 right-6">
-                    <div className="px-3 py-1 bg-blue-500/10 rounded-full border border-blue-500/20">
-                        <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Full Mode</span>
-                    </div>
-                </div>
-
                 <div className="flex items-center gap-4 mb-2">
                     <div className="w-10 h-10 bg-[#1e3a5f] rounded-xl flex items-center justify-center shadow-inner border border-slate-700/40 flex-shrink-0">
                         <ShieldCheck className="h-5 w-5 text-cyan-400" />

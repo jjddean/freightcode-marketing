@@ -50,11 +50,11 @@ export function GeoRiskSection() {
 
                     {/* Right: Image */}
                     <div className="w-full">
-                        <div className="relative w-full overflow-hidden rounded-2xl bg-white shadow-sm">
+                        <div className="relative w-full overflow-hidden rounded-3xl bg-white shadow-[0_24px_60px_rgba(15,23,42,0.18)]">
                             <img
                                 src="/georisk-preview.png"
                                 alt="GeoRisk Navigator Dashboard"
-                                className="object-contain w-full h-auto max-h-[600px]"
+                                className="object-contain w-full h-auto max-h-[820px]"
                             />
                         </div>
                         <p className="mt-3 text-sm text-gray-400 text-center">

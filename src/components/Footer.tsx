@@ -6,9 +6,9 @@ export function Footer() {
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-2 md:grid-cols-7 gap-6 mb-10">
                     {/* Logo / About */}
-                    <div className="col-span-2 md:col-span-1">
-                        <div className="mb-3">
-                            <div className="flex items-baseline whitespace-nowrap text-[#003057]">
+                    <div className="col-span-2 md:col-span-1 -mt-1">
+                        <div className="mb-4">
+                            <div className="flex items-baseline whitespace-nowrap text-[#003057] leading-none">
                                 <span className="font-bold tracking-tight text-[22px]">freight</span>
                                 <span className="font-normal tracking-tight text-[22px]">code</span>
                                 <span className="font-normal text-[13px] -translate-y-[5px] ml-[-1px]">®</span>
@@ -91,6 +91,10 @@ export function Footer() {
                             <li className="flex items-center gap-2 group">
                                 <a href="https://convex.dev" target="_blank" rel="noopener noreferrer" className="hover:text-[#003057]">Convex</a>
                                 <img src="https://cdn.brandfetch.io/convex.dev?c=1idbnvbXCRylLLzZ6DP&type=symbol" alt="Convex" className="w-3 h-3 object-contain opacity-40 group-hover:opacity-100 transition-opacity" />
+                            </li>
+                            <li className="flex items-center gap-2 group">
+                                <a href="https://docusignimpact.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#003057]">DocuSign</a>
+                                <img src="https://cdn.brandfetch.io/idRJZsiuYV/w/57/h/57/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1759225919166" alt="DocuSign Impact" className="w-3.5 h-3.5 object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
                             </li>
                         </ul>
                     </div>

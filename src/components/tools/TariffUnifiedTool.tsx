@@ -11,18 +11,14 @@ export const TariffUnifiedTool = () => {
     return (
         <div className="w-full max-w-md mx-auto space-y-6">
             {/* Toggle Switch */}
-            <div className="flex bg-[#0d1f35] p-1 rounded-xl border border-slate-700/50 relative">
-                <div
-                    className={cn(
-                        "absolute inset-y-1 w-[calc(50%-4px)] bg-[#1e3a5f] rounded-lg transition-all duration-300 ease-out shadow-sm border border-slate-600/50",
-                        mode === 'advanced' ? "left-[calc(50%+2px)]" : "left-1"
-                    )}
-                />
+            <div className="flex items-center justify-center gap-2 p-1 bg-[#0d1f35] border border-slate-700/60 rounded-full w-fit mx-auto">
                 <button
                     onClick={() => setMode('simplified')}
                     className={cn(
-                        "flex-1 relative z-10 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors duration-200 text-center rounded-lg",
-                        mode === 'simplified' ? "text-cyan-400" : "text-slate-500 hover:text-slate-400"
+                        "px-6 py-2.5 rounded-full text-sm font-medium transition-all",
+                        mode === 'simplified'
+                            ? "bg-[#1e3a5f] text-cyan-400 shadow-sm border border-slate-600/70"
+                            : "text-slate-400 hover:text-slate-300"
                     )}
                 >
                     Simplified Mode
@@ -30,8 +26,10 @@ export const TariffUnifiedTool = () => {
                 <button
                     onClick={() => setMode('advanced')}
                     className={cn(
-                        "flex-1 relative z-10 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors duration-200 text-center rounded-lg",
-                        mode === 'advanced' ? "text-blue-400" : "text-slate-500 hover:text-slate-400"
+                        "px-6 py-2.5 rounded-full text-sm font-medium transition-all",
+                        mode === 'advanced'
+                            ? "bg-[#1e3a5f] text-cyan-400 shadow-sm border border-slate-600/70"
+                            : "text-slate-400 hover:text-slate-300"
                     )}
                 >
                     Full Audit Sim

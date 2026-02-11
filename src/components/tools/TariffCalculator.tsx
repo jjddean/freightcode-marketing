@@ -78,7 +78,7 @@ export const TariffCalculator = () => {
                                 <Input
                                     type="text"
                                     placeholder="e.g. 500,000"
-                                    className="!bg-[#0a1628] border-slate-700 !text-white placeholder:text-slate-600 text-lg pl-14 h-14 rounded-xl focus:border-cyan-500 focus:ring-0 transition-all shadow-sm font-semibold"
+                                    className="!bg-[#0a1628] border-slate-700 !text-white placeholder:text-slate-600 text-lg pl-14 h-14 rounded-xl focus:border-cyan-500 focus:ring-0 !focus-visible:ring-0 !focus-visible:ring-offset-0 focus-visible:outline-none transition-all shadow-sm font-semibold"
                                     value={importValue}
                                     onChange={(e) => setImportValue(e.target.value)}
                                     onKeyDown={(e) => {
@@ -145,7 +145,7 @@ export const TariffCalculator = () => {
                                 required
                                 type="email"
                                 placeholder="work@company.com"
-                                className="!bg-[#0a1628] border-slate-700 !text-white h-12 rounded-xl"
+                                className="!bg-[#0a1628] border-slate-700 !text-white h-12 rounded-xl focus:border-cyan-500 focus:ring-0 !focus-visible:ring-0 !focus-visible:ring-offset-0 focus-visible:outline-none"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             />
@@ -156,7 +156,7 @@ export const TariffCalculator = () => {
                             <Input
                                 required
                                 placeholder="Global Trade Inc."
-                                className="!bg-[#0a1628] border-slate-700 !text-white h-12 rounded-xl"
+                                className="!bg-[#0a1628] border-slate-700 !text-white h-12 rounded-xl focus:border-cyan-500 focus:ring-0 !focus-visible:ring-0 !focus-visible:ring-offset-0 focus-visible:outline-none"
                                 value={formData.company}
                                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                             />
@@ -166,7 +166,7 @@ export const TariffCalculator = () => {
                             <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Import Value (USD)</label>
                             <Input
                                 disabled
-                                className="!bg-[#0a1628]/50 border-slate-700 !text-slate-400 h-12 rounded-xl cursor-not-allowed"
+                                className="!bg-[#0a1628]/50 border-slate-700 !text-slate-400 h-12 rounded-xl cursor-not-allowed !focus-visible:ring-0 !focus-visible:ring-offset-0"
                                 value={`$${parseFloat(getCleanValue(importValue)).toLocaleString()}`}
                             />
                         </div>

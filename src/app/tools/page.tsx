@@ -34,7 +34,24 @@ export default function ToolsPage() {
                 <div className="max-w-5xl mx-auto space-y-20">
                     {/* Tariff Tool */}
                     <div className="relative">
-                        <TariffUnifiedTool />
+                        <div className="bg-[#0d1f35] rounded-3xl border border-slate-700 overflow-hidden shadow-sm">
+                            <div className="p-8 md:p-12 bg-[#0a1628]/40 border-b border-slate-700">
+                                <div className="text-center mb-8">
+                                    <div className="inline-flex items-center px-3 py-1 bg-[#1e3a5f] rounded-full mb-4">
+                                        <span className="text-cyan-400 text-[10px] font-bold uppercase tracking-widest">Tariff Tool</span>
+                                    </div>
+                                    <h2 className="text-3xl font-bold text-white mb-3">
+                                        Tariff Refund <span className="text-cyan-400">Estimator</span>
+                                    </h2>
+                                    <p className="text-blue-200/80 text-base max-w-2xl mx-auto">
+                                        Estimate Section 301 and IEEPA exposure using simplified and advanced audit modes.
+                                    </p>
+                                </div>
+                                <div className="max-w-2xl mx-auto">
+                                    <TariffUnifiedTool />
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Embedded Tools Section */}

@@ -18,7 +18,7 @@ export function Header() {
                         Pricing
                     </a>
                     <a href="/tools" className="text-sm text-gray-600 hover:text-[#003057] transition-colors">
-                        Tariff Refund Estimator
+                        Tools
                     </a>
                     <a href="#georisk" className="text-sm text-[#003057] font-medium hover:text-[#003057] transition-colors">
                         GeoRisk Navigator™

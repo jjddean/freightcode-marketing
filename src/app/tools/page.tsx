@@ -9,11 +9,12 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 export default function ToolsPage() {
     return (
-        <main className="min-h-screen bg-[#0a1628]">
+        <div className="min-h-screen flex flex-col">
             <Header />
 
-            {/* Hero Section for Tools */}
-            <section className="pt-32 pb-16 border-b border-slate-800 relative overflow-hidden">
+            <main className="flex-1 bg-[#0a1628]">
+                {/* Hero Section for Tools */}
+                <section className="pt-32 pb-16 border-b border-slate-800 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-3xl pointer-events-none"></div>
                 <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
                     <div className="inline-flex items-center px-3 py-1 bg-[#1e3a5f] rounded-full mb-6">
@@ -106,7 +107,8 @@ export default function ToolsPage() {
                 </div>
             </section>
 
+            </main>
             <Footer />
-        </main>
+        </div>
     );
 }

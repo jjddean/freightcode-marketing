@@ -1,6 +1,6 @@
 import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
-import { ProductDemo } from '@/components/ProductDemo';
+import { InteractiveWalkthrough } from '@/components/InteractiveWalkthrough';
 import { Features } from '@/components/Features';
 
 import { Pricing } from '@/components/Pricing';
@@ -8,8 +8,6 @@ import { Footer } from '@/components/Footer';
 import { GeoRiskSection } from '@/components/GeoRiskSection';
 
 export default function Home() {
-  const productVideoId = '';
-
   return (
     <main className="min-h-screen bg-white scroll-smooth">
       <Header />
@@ -18,8 +16,8 @@ export default function Home() {
         <Hero />
       </div>
 
-      <section id="demo" className="bg-white">
-        <ProductDemo videoId={productVideoId} />
+      <section id="walkthrough" className="bg-white border-b border-slate-100">
+        <InteractiveWalkthrough />
       </section>
 
       <GeoRiskSection />
@@ -146,9 +144,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Pricing section hidden for private beta launch */}
+      {/* 
       <section id="pricing" className="bg-white">
         <Pricing />
-      </section>
+      </section> 
+      */}
 
       <Footer />
     </main>

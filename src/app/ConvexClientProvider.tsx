@@ -7,7 +7,7 @@ import { ConvexProvider, ConvexReactClient } from "convex/react";
 // Use the same Convex URL as the main app
 // In dev: VITE_CONVEX_URL usually found in .env.local of main app
 // For now, allow it to fallback or expect env var
-const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL || "https://witty-wombat-187.convex.cloud"; // Hardcoding dev URL for MVP speed if env missing in marketing site
+const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL || "https://mellow-gerbil-372.convex.cloud";
 
 const convex = new ConvexReactClient(convexUrl);
 

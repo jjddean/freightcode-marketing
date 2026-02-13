@@ -1,27 +1,27 @@
 const features = [
     {
-        title: 'Instant Quotes',
-        description: 'Generate and compare carrier pricing across supported modes.',
+        title: 'Direct Booking',
+        description: 'Book space directly with Maersk Spot and CMA CGM at fixed, guaranteed rates.',
     },
     {
-        title: 'GeoRisk™',
-        description: 'View route-level risk indicators across selected trade lanes.',
+        title: 'GeoRisk Navigator™',
+        description: 'Sub-second route-level risk indicators, sanctions data, and weather alerts.',
     },
     {
-        title: 'Auto-Docs',
-        description: 'Generate bills of lading and commercial invoices from shipment data.',
+        title: 'Smart Compliance',
+        description: 'Automate Bills of Lading and commercial invoices with AI-verified data.',
     },
     {
-        title: 'Compliance',
-        description: 'Perform KYC checks and document validation within workflow.',
+        title: 'Embedded Finance',
+        description: 'Access trade finance (BNPL) and instant cargo insurance in one click.',
     },
     {
-        title: 'Tracking',
-        description: 'Monitor vessel and air milestones with live status updates.',
+        title: 'Premium Tracking',
+        description: 'High-fidelity vessel tracking with automated milestone alerts via Mapbox.',
     },
     {
-        title: 'API First',
-        description: 'Integrate Freightcode with internal systems and partner tools.',
+        title: 'Hybrid Support',
+        description: 'Get white-glove logistics support from our team directly in the dashboard.',
     },
 ];
 

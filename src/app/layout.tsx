@@ -1,4 +1,5 @@
 import "./globals.css";
+import ConvexClientProvider from "./ConvexClientProvider";
 
 export default function RootLayout({
   children,
@@ -9,7 +10,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
       </head>
-      <body>{children}</body>
+      <body>
+        <ConvexClientProvider>
+          {children}
+        </ConvexClientProvider>
+      </body>
     </html>
   );
 }

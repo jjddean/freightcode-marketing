@@ -173,3 +173,49 @@ Reference: `src/app/tools/page.tsx`, `src/components/tools/HSCodeLookup.tsx`, `s
 - Pricing/Features/GeoRisk sections: `src/components/Pricing.tsx`, `src/components/Features.tsx`, `src/components/GeoRiskSection.tsx`
 - Tools shell/pages: `src/app/tools/page.tsx`, `src/app/tools/currency-converter/page.tsx`, `src/app/tools/hscode-lookup/page.tsx`
 - Tool components: `src/components/tools/TariffCalculator.tsx`, `src/components/tools/FullModeSimulator.tsx`, `src/components/tools/TariffUnifiedTool.tsx`, `src/components/tools/HSCodeLookup.tsx`, `src/components/tools/CurrencyConverter.tsx`
+
+## UI Foundation Rule (Required for All New Pages)
+
+This design spec is the implementation contract for all future pages and components.
+
+- Use the existing UI system first: shared components in `src/components/ui/*`.
+- Use Radix-based primitives via wrappers, not ad-hoc page-level controls.
+- Keep styling aligned to theme tokens in `src/app/globals.css` (`--background`, `--foreground`, `--card`, `--border`, `--input`, `--ring`, `--radius`).
+- Preserve existing spacing, radius, border, and shadow patterns documented in this spec.
+- Do not introduce a second design language (new control styles, mismatched spacing scale, or conflicting colors).
+
+### Radix Baseline (Current)
+
+- `@radix-ui/react-dialog`
+- `@radix-ui/react-popover`
+- `@radix-ui/react-scroll-area`
+
+### Required Component Usage Pattern
+
+- Prefer wrappers from `src/components/ui/*`:
+  - `Button`, `Input`, `Select`, `Popover`, `Dialog`, `Command`, `ScrollArea`, `Tabs`, `Card`
+- If a needed control does not exist:
+  - Add it once in `src/components/ui/*` with token-based styling.
+  - Reuse it across pages.
+
+### Quote-Style Form/Card Baseline (Main App Pattern)
+
+Use this as the default pattern for new form-heavy pages.
+
+- Outer card shell:
+  - `bg-white rounded-2xl shadow-xl border border-gray-100 p-8`
+- Form structure:
+  - Root `space-y-6`
+  - Responsive grid layout (`grid grid-cols-1 md:grid-cols-2/3 gap-*`)
+- Inputs/controls:
+  - Shared `Input`, `Select`, `Popover`, `Command`, `Calendar`, `Button`
+- Progress/section treatment:
+  - Subtle bordered sections, tokenized focus ring, consistent label/error typography
+
+### New Page Acceptance Checklist
+
+- Uses shared UI wrappers (not raw one-off controls).
+- Uses theme tokens and documented palette.
+- Matches documented spacing rhythm and elevation.
+- Matches existing card/form interaction behavior.
+- Introduces no conflicting visual patterns.

@@ -3,7 +3,6 @@
 
 import { useState } from "react";
 import { useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
 import { useRouter } from "next/navigation";
 
 export default function QuoteWidget() {
@@ -15,7 +14,7 @@ export default function QuoteWidget() {
 
     // Initialize mutation securely
     // Note: We need to ensure the ConvexProvider is wrapping this in the layout
-    const createPublicQuote = useMutation(api.quotes.createPublicQuote);
+    const createPublicQuote = useMutation("quotes:createPublicQuote" as any);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

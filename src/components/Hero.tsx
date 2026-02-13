@@ -2,14 +2,13 @@
 
 import { useState } from 'react';
 import { useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
 import Image from 'next/image';
 
 export function Hero() {
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
-    const joinWaitlist = useMutation(api.marketing.joinWaitlist);
+    const joinWaitlist = useMutation("marketing:joinWaitlist" as any);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

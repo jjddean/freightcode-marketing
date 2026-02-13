@@ -1,7 +1,11 @@
 const features = [
     {
-        title: 'Direct Booking',
-        description: 'Book space directly with Maersk Spot and CMA CGM at fixed, guaranteed rates.',
+        title: 'Quote & Booking',
+        description: 'Instant quotes for UK-EU, UK-US, UK-Asia shipping lanes with direct booking capability.',
+    },
+    {
+        title: 'Digital Documentation',
+        description: 'Streamlined creation and exchange of Bills of Lading, Air Waybills, and commercial invoices.',
     },
     {
         title: 'GeoRisk Navigator™',
@@ -12,16 +16,12 @@ const features = [
         description: 'Automate Bills of Lading and commercial invoices with AI-verified data.',
     },
     {
-        title: 'Embedded Finance',
-        description: 'Access trade finance (BNPL) and instant cargo insurance in one click.',
-    },
-    {
         title: 'Premium Tracking',
-        description: 'High-fidelity vessel tracking with automated milestone alerts via Mapbox.',
+        description: 'Live shipment updates integrated with carrier APIs for complete visibility.',
     },
     {
-        title: 'Hybrid Support',
-        description: 'Get white-glove logistics support from our team directly in the dashboard.',
+        title: 'Secure Payments',
+        description: 'Integrated payment processing with transparent invoicing and billing management.',
     },
 ];
 

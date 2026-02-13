@@ -11,7 +11,7 @@ export function GeoRiskSection() {
     return (
         <section className="py-12 px-6 bg-gray-50 border-t border-gray-100">
             <div className="max-w-6xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-10 items-center">
                     {/* Left: Content */}
                     <div>
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 rounded-full border border-amber-200 mb-4">
@@ -54,7 +54,7 @@ export function GeoRiskSection() {
                             <img
                                 src="/georisk-preview.png"
                                 alt="GeoRisk Navigator Dashboard"
-                                className="object-contain w-full h-auto max-h-[820px]"
+                                className="block object-cover w-full h-auto max-h-[820px] scale-[1.06] origin-center"
                             />
                         </div>
                         <p className="mt-3 text-sm text-gray-400 text-center">

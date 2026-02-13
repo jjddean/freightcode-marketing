@@ -5,7 +5,7 @@ export function Header() {
         <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
             <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
                 {/* Logo - matches social media branding */}
-                <a href="/" className="block">
+                <a href="/" className="block pl-6 sm:pl-0">
                     <BrandLogo size="lg" />
                 </a>
 
@@ -26,7 +26,12 @@ export function Header() {
                     <a href="#demo" className="text-sm text-gray-600 hover:text-[#003057] transition-colors">
                         Walkthrough
                     </a>
-                    Request Access
+                    <a
+                        href="#"
+                        className="inline-flex items-center justify-center px-4 h-9 rounded-lg bg-[#003057] text-white text-sm font-medium hover:bg-[#00284a] transition-colors"
+                    >
+                        Request Access
+                    </a>
                 </nav>
 
                 {/* Mobile menu button */}

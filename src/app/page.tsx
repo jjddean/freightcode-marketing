@@ -2,6 +2,7 @@ import { Header } from '@/components/Header';
 import { Hero } from '@/components/Hero';
 import { InteractiveWalkthrough } from '@/components/InteractiveWalkthrough';
 import { Features } from '@/components/Features';
+import { FreeResourcesSection } from '@/components/FreeResourcesSection';
 
 import { Pricing } from '@/components/Pricing';
 import { Footer } from '@/components/Footer';
@@ -16,15 +17,17 @@ export default function Home() {
         <Hero />
       </div>
 
+      <section id="capabilities" className="bg-white">
+        <Features />
+      </section>
+
       <section id="walkthrough" className="bg-white border-b border-slate-100">
         <InteractiveWalkthrough />
       </section>
 
       <GeoRiskSection />
 
-      <section id="capabilities" className="bg-white">
-        <Features />
-      </section>
+      <FreeResourcesSection />
 
       {/* 3.5. Tariff Refund Estimator Section - SOLID NAVY BACKGROUND */}
       <section id="tools" className="pt-12 pb-24 bg-[#0a1628] relative overflow-hidden border-t border-slate-800">
@@ -97,7 +100,7 @@ export default function Home() {
 
             <div className="mt-10 w-full max-w-3xl mx-auto rounded-2xl border border-slate-800 bg-slate-900/50 p-6 text-center">
               <div className="inline-flex items-center px-3 py-1 bg-[#1e3a5f] rounded-full mb-4">
-                <span className="text-cyan-300 text-xs font-medium">Tariff Refund Estimator</span>
+                <span className="text-cyan-400 text-xs font-medium">Tariff Refund Estimator</span>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Quantify Section 301 Exposure</h3>
               <p className="text-slate-400 text-base leading-relaxed">

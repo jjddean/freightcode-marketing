@@ -64,15 +64,15 @@ export function InteractiveWalkthrough() {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="inline-block px-4 py-1.5 bg-gray-100 text-[#003057] rounded-full text-[10px] font-semibold uppercase tracking-[0.2em] border border-gray-200"
+                    className="inline-flex items-center px-3 py-1 bg-[#1e3a5f] rounded-full"
                 >
-                    Interactive Demo
+                    <span className="text-cyan-400 text-xs font-medium">Interactive Demo</span>
                 </motion.div>
                 <h2 className="text-2xl md:text-3xl font-semibold text-[#003057] mb-3">
-                    Core Capabilities
+                    Product Walkthrough
                 </h2>
                 <p className="text-gray-600 text-sm max-w-lg mx-auto">
-                    Experience the 2026 digital freight workflow. Instant Maersk Spot rates, direct booking, and embedded insurance.
+                    Step through booking, rate selection, and shipment confirmation in a live product preview.
                 </p>
             </div>
 

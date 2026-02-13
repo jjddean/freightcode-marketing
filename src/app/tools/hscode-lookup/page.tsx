@@ -16,7 +16,7 @@ export default function HSCodePage() {
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-3xl pointer-events-none"></div>
                 <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
                     <div className="inline-flex items-center px-3 py-1 bg-[#1e3a5f] rounded-full mb-6">
-                        <span className="text-cyan-400 text-[10px] font-bold uppercase tracking-widest">Free Tool</span>
+                        <span className="text-cyan-400 text-xs font-medium">Free Tool</span>
                     </div>
                     <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">
                         HS Code <span className="text-cyan-400">Lookup</span>

@@ -14,8 +14,8 @@ export function GeoRiskSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-10 items-center">
                     {/* Left: Content */}
                     <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 rounded-full border border-amber-200 mb-4">
-                            <span className="text-amber-700 text-xs font-medium">Business & Enterprise</span>
+                        <div className="inline-flex items-center px-3 py-1 bg-[#1e3a5f] rounded-full mb-4">
+                            <span className="text-cyan-400 text-xs font-medium">Business & Enterprise</span>
                         </div>
 
                         <h2 className="text-2xl md:text-3xl font-semibold text-[#003057] mb-4">

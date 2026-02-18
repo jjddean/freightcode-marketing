@@ -96,6 +96,10 @@ export function Footer() {
                                 <a href="https://docusignimpact.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#003057]">DocuSign</a>
                                 <img src="https://cdn.brandfetch.io/idRJZsiuYV/w/57/h/57/theme/dark/logo.png?c=1bxid64Mup7aczewSAYMX&t=1759225919166" alt="DocuSign Impact" className="w-3.5 h-3.5 object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
                             </li>
+                            <li className="flex items-center gap-2 group">
+                                <a href="https://www.gov.uk/government/organisations/hm-revenue-customs" target="_blank" rel="noopener noreferrer" className="hover:text-[#003057]">HMRC</a>
+                                <img src="/logos/hmrc-logo.svg" alt="HM Revenue and Customs" className="w-5 h-5 object-contain opacity-60 group-hover:opacity-100 transition-opacity" />
+                            </li>
                         </ul>
                     </div>
                 </div>

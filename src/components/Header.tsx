@@ -26,6 +26,9 @@ export function Header() {
                     <a href="#demo" className="text-sm text-gray-600 hover:text-[#003057] transition-colors">
                         Walkthrough
                     </a>
+                    <a href="/dashboard-test" className="text-sm font-bold text-cyan-600 hover:text-cyan-700 transition-colors">
+                        Test Dashboard
+                    </a>
                     <a
                         href="#"
                         className="inline-flex items-center justify-center px-4 h-9 rounded-lg bg-[#003057] text-white text-sm font-medium hover:bg-[#00284a] transition-colors"

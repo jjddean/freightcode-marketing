@@ -11,8 +11,9 @@ Source of truth: implemented styles in this repository, primarily `src/app/globa
   - `--font-mono: var(--font-geist-mono)`
 - Weight usage (observed):
   - Body copy: `font-medium` or default
-  - Section titles: `font-semibold` / `font-bold`
-  - KPI/value numerics: `font-bold` / `font-extrabold`
+  - Section titles: `font-semibold`
+  - Primary KPI/value numerics: `font-bold`
+  - Secondary labels/metadata: `font-medium` or `font-semibold` (at smaller sizes)
 
 ## Core Theme Tokens
 
@@ -96,9 +97,12 @@ Defined in `src/app/globals.css`.
 
 ## Shape, Borders, and Elevation
 
-- Global radius token: `0.5rem`.
-- Common radii:
-  - `rounded-lg`, `rounded-xl`, `rounded-2xl`, occasional `rounded-3xl`.
+- Global radius token: `0.375rem` (`rounded-md`).
+- Default Radii Standards:
+  - Sidebar Items / Buttons / Inputs: `rounded-md`
+  - Secondary Cards / Widgets: `rounded-lg`
+  - Primary Page Containers / Large Panels: `rounded-xl`
+  - *Avoid `rounded-2xl` or larger unless for specific aesthetic impact in marketing sections.*
 - Border treatment:
   - Light UI: `border-gray-200` / `border-slate-200`
   - Dark UI: `border-slate-700` / `border-slate-800`
@@ -125,11 +129,10 @@ Defined in `src/app/globals.css`.
   - Primary actions: cyan buttons
 - Status/result states use emerald/blue accents for confidence and verification messaging.
 
-## Accessibility and Readability Notes
-
 - High contrast text is used in both modes (white on navy, dark text on white).
 - Interactive elements generally include hover color transitions and visible focus ring utilities.
-- Body copy is mostly `text-sm` to `text-base` with relaxed line-height for dense trade/compliance content.
+- Body copy is mostly `text-xs` to `text-sm` for high-density trade/compliance content.
+- Status badges and micro-labels: `text-[8px]` to `text-[9px]` with uppercase tracking.
 
 ## Quote Form Spec
 
@@ -203,10 +206,10 @@ This design spec is the implementation contract for all future pages and compone
 Use this as the default pattern for new form-heavy pages.
 
 - Outer card shell:
-  - `bg-white rounded-2xl shadow-xl border border-gray-100 p-8`
-- Form structure:
-  - Root `space-y-6`
-  - Responsive grid layout (`grid grid-cols-1 md:grid-cols-2/3 gap-*`)
+  - `bg-white rounded-xl shadow-lg border border-gray-100 p-6`
+- Form/Data structure:
+  - Root `space-y-4` (high density)
+  - Responsive grid layout (`grid grid-cols-1 md:grid-cols-2/3 gap-4`)
 - Inputs/controls:
   - Shared `Input`, `Select`, `Popover`, `Command`, `Calendar`, `Button`
 - Progress/section treatment:

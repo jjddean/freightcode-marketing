@@ -21,7 +21,7 @@ export const TariffUnifiedTool = () => {
                             : "text-slate-400 hover:text-slate-300"
                     )}
                 >
-                    Simplified Mode
+                    UK Import Cost Calculator
                 </button>
                 <button
                     onClick={() => setMode('advanced')}
@@ -32,7 +32,7 @@ export const TariffUnifiedTool = () => {
                             : "text-slate-400 hover:text-slate-300"
                     )}
                 >
-                    Full Audit Sim
+                    UK Duty & VAT Simulator
                 </button>
             </div>
 

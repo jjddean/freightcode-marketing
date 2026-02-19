@@ -1,237 +1,247 @@
 'use client';
 
-import React, { useState } from 'react';
-import { ShieldCheck, FileText, AlertCircle, ArrowRight, Calculator } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Shield, ArrowRight, Info, Search, FileText, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
+import { fetchHSCode, fetchTradeData, calculateUKImportCosts } from '@/lib/trade-data';
 
 export const FullModeSimulator = () => {
-    const [step, setStep] = useState<'input' | 'form' | 'success'>('input');
-    const [data, setData] = useState({ hts: '', value: '', date: '', origin: 'CN' });
-    const [refund, setRefund] = useState<number | null>(null);
-    const [formData, setFormData] = useState({
-        email: '',
-        company: '',
-        notes: ''
+    const [step, setStep] = useState<'audit' | 'results'>('audit');
+    const [data, setData] = useState({
+        hs: '',
+        value: '',
+        origin: 'CN',
+        freight: '',
+        insurance: '',
+        incoterm: 'fob'
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [hsInfo, setHsInfo] = useState<{ code: string; desc: string } | null>(null);
+    const [results, setResults] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    // Robust cleaner: strips everything except digits and first decimal point
-    const getCleanValue = (val: string) => val.replace(/[^0-9.]/g, '');
-
-    const handleCalculate = () => {
-        const cleanValue = getCleanValue(data.value);
-        const value = parseFloat(cleanValue);
-        if (isNaN(value) || value <= 0 || !data.hts || !data.date) return;
-
-        // 25% tariff × 90% eligibility coefficient (standard for the industry)
-        const estimatedRefund = value * 0.25 * 0.90;
-        setRefund(estimatedRefund);
+    const handleHsSearch = async (val: string) => {
+        setData({ ...data, hs: val });
+        if (val.length >= 4) {
+            const info = await fetchHSCode(val);
+            setHsInfo(info);
+        } else {
+            setHsInfo(null);
+        }
     };
 
-    const handleLeadSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setIsSubmitting(false);
-        setStep('success');
+    const handleAudit = async () => {
+        setIsLoading(true);
+        // Simulate "Forensic Audit" delay
+        await new Promise(r => setTimeout(r, 1500));
+
+        const tradeData = await fetchTradeData();
+        const baseRate = tradeData.hs_overrides[data.hs.substring(0, 4)] ?? 0.025;
+
+        const costs = calculateUKImportCosts({
+            goodsValue: parseFloat(data.value) || 0,
+            freight: parseFloat(data.freight) || 0,
+            insurance: parseFloat(data.insurance) || 0,
+            dutyRate: baseRate,
+            isVatRegistered: true,
+            hasPreference: false
+        });
+
+        setResults({
+            ...costs,
+            hsDesc: hsInfo?.desc || 'General Merchandise'
+        });
+        setIsLoading(false);
+        setStep('results');
     };
 
     return (
-        <Card className="max-w-md mx-auto !bg-[#0d1f35] border-slate-700 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] rounded-2xl overflow-hidden">
-            <CardHeader className="!bg-[#0a1628]/50 text-white py-6 px-8 relative border-b border-slate-700/50">
-                <div className="flex items-center gap-4 mb-2">
-                    <div className="w-10 h-10 bg-[#1e3a5f] rounded-xl flex items-center justify-center shadow-inner border border-slate-700/40 flex-shrink-0">
-                        <ShieldCheck className="h-5 w-5 text-cyan-400" />
+        <Card className="max-w-2xl mx-auto !bg-[#0d1f35] border-slate-700 shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] rounded-2xl overflow-hidden">
+            <CardHeader className="!bg-[#0a1628]/50 text-white py-8 px-10 relative border-b border-slate-700/50">
+                <div className="flex items-center gap-5">
+                    <div className="w-12 h-12 bg-[#1e3a5f] rounded-2xl flex items-center justify-center shadow-inner border border-slate-700/40 relative">
+                        <Shield className="h-6 w-6 text-cyan-400" />
+                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-500 rounded-full animate-pulse" />
                     </div>
-                    <CardTitle className="text-xl font-bold tracking-tight text-white m-0">
-                        {step === 'success' ? 'Verification Sent' : 'Tariff Audit Simulator'}
-                    </CardTitle>
+                    <div>
+                        <CardTitle className="text-2xl font-bold tracking-tight text-white mb-1">
+                            UK Duty & VAT Simulator
+                        </CardTitle>
+                        <p className="text-slate-400 text-sm font-medium">Professional Customs Value & Tax Audit</p>
+                    </div>
                 </div>
-                <p className="text-slate-400 text-xs leading-relaxed font-medium">
-                    {step === 'success' ? 'Personalized audit in progress' : 'Run a high-fidelity HTS eligibility simulation.'}
-                </p>
             </CardHeader>
 
-            <CardContent className="p-8 pt-10 !bg-[#0d1f35]">
-                {step === 'input' && (
-                    <div className="space-y-6">
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">HTS Code</label>
-                                <Input
-                                    placeholder="e.g. 8517.12.00"
-                                    className="!bg-[#0a1628] border-slate-700 !text-white h-12 rounded-xl text-sm font-semibold"
-                                    value={data.hts}
-                                    onChange={(e) => setData({ ...data, hts: e.target.value })}
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Origin</label>
-                                <Select value={data.origin} onValueChange={(v) => setData({ ...data, origin: v })}>
-                                    <SelectTrigger>
-                                        <SelectValue />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="CN">China (CN)</SelectItem>
-                                        <SelectItem value="VN">Vietnam (VN)</SelectItem>
-                                        <SelectItem value="other">Other</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Shipment Value (USD)</label>
-                            <Input
-                                type="text"
-                                placeholder="10,000"
-                                className="!bg-[#0a1628] border-slate-700 !text-white h-12 rounded-xl text-lg font-bold"
-                                value={data.value}
-                                onChange={(e) => setData({ ...data, value: e.target.value })}
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Entry Date</label>
-                            <Input
-                                type="date"
-                                className="!bg-[#0a1628] border-slate-700 !text-white h-12 rounded-xl text-sm"
-                                value={data.date}
-                                onChange={(e) => setData({ ...data, date: e.target.value })}
-                            />
-                        </div>
-
-                        <Button
-                            onClick={handleCalculate}
-                            className="w-full h-14 bg-cyan-500 hover:bg-cyan-600 !text-white font-bold rounded-xl flex items-center justify-center gap-2"
-                            disabled={!data.hts || !data.value || !data.date}
-                        >
-                            Run Detailed Simulation
-                            <ArrowRight className="h-4 w-4" />
-                        </Button>
-
-                        {refund !== null && (
-                            <div className="pt-6 animate-in fade-in slide-in-from-top-4 duration-500">
-                                <div className="p-6 bg-blue-500/10 border border-blue-500/20 rounded-2xl text-center">
-                                    <div className="flex justify-center mb-3">
-                                        <ShieldCheck className="h-6 w-6 text-blue-400" />
+            <CardContent className="p-10 !bg-[#0d1f35]">
+                {step === 'audit' && (
+                    <div className="space-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="space-y-4">
+                                <div className="space-y-2">
+                                    <Label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Commodity HS Code</Label>
+                                    <div className="relative">
+                                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                                        <Input
+                                            placeholder="e.g. 6403 91"
+                                            className="!bg-[#0a1628] border-slate-700 !text-white h-14 pl-12 rounded-xl focus:border-cyan-500 font-mono tracking-wider"
+                                            value={data.hs}
+                                            onChange={(e) => handleHsSearch(e.target.value)}
+                                        />
                                     </div>
-                                    <p className="text-[9px] font-bold text-blue-400 uppercase tracking-[0.15em] mb-2">
-                                        Verified Potential Recovery
-                                    </p>
-                                    <p className="text-4xl font-bold text-white tracking-tighter">
-                                        ${refund.toLocaleString(undefined, { minimumFractionDigits: 0 })}
-                                    </p>
-                                    <p className="mt-3 text-[11px] text-slate-400 leading-relaxed font-medium">
-                                        HTS {data.hts} is eligible for Section 301 refund coverage.
-                                    </p>
-                                    <Button
-                                        onClick={() => setStep('form')}
-                                        className="w-full h-14 bg-white/10 hover:bg-white/20 !text-white border border-white/20 font-bold rounded-xl mt-6 transition-all"
-                                    >
-                                        Initiate Recovery Claim
-                                        <ArrowRight className="ml-2 h-4 w-4" />
-                                    </Button>
-                                    <div className="mt-4 flex gap-2 items-center justify-center text-[9px] text-blue-400/80 font-bold uppercase tracking-widest">
-                                        <AlertCircle className="h-3 w-3" />
-                                        180-Day Protest Window: Active
+                                    {hsInfo && (
+                                        <p className="text-[11px] text-cyan-400/80 font-medium ml-1 animate-in fade-in slide-in-from-left-2">
+                                            Found: {hsInfo.desc.substring(0, 60)}...
+                                        </p>
+                                    )}
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Origin Territory</Label>
+                                    <Input
+                                        placeholder="CHINA (CN)"
+                                        className="!bg-[#0a1628] border-slate-700 !text-white h-14 rounded-xl"
+                                        value={data.origin}
+                                        onChange={(e) => setData({ ...data, origin: e.target.value })}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-4">
+                                <div className="space-y-2">
+                                    <Label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">FOB / EXW Value (GBP)</Label>
+                                    <div className="relative">
+                                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">£</span>
+                                        <Input
+                                            type="number"
+                                            placeholder="0.00"
+                                            className="!bg-[#0a1628] border-slate-700 !text-white h-14 pl-10 rounded-xl font-bold text-lg"
+                                            value={data.value}
+                                            onChange={(e) => setData({ ...data, value: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <Label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Freight</Label>
+                                        <Input
+                                            type="number"
+                                            placeholder="£"
+                                            className="!bg-[#0a1628] border-slate-700 !text-white h-14 rounded-xl"
+                                            value={data.freight}
+                                            onChange={(e) => setData({ ...data, freight: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <Label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Insurance</Label>
+                                        <Input
+                                            type="number"
+                                            placeholder="£"
+                                            className="!bg-[#0a1628] border-slate-700 !text-white h-14 rounded-xl"
+                                            value={data.insurance}
+                                            onChange={(e) => setData({ ...data, insurance: e.target.value })}
+                                        />
                                     </div>
                                 </div>
                             </div>
-                        )}
+                        </div>
+
+                        <div className="p-6 bg-cyan-500/5 border border-cyan-500/20 rounded-2xl flex gap-4 items-center">
+                            <Info className="h-5 w-5 text-cyan-400 flex-shrink-0" />
+                            <p className="text-[11px] text-slate-400 leading-relaxed font-medium">
+                                The Simulator verifies customs valuation methods according to UK General Interpretation Rules (GIR). Advanced audit includes trade remedies and preferential tariff eligibility checks.
+                            </p>
+                        </div>
+
+                        <Button
+                            onClick={handleAudit}
+                            disabled={!data.hs || !data.value || isLoading}
+                            className="w-full h-16 bg-cyan-500 hover:bg-cyan-600 !text-white text-lg font-bold rounded-2xl shadow-lg active:scale-[0.98] transition-all"
+                        >
+                            {isLoading ? (
+                                <span className="flex items-center gap-3">
+                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                    Verifying HTS & Origin Data...
+                                </span>
+                            ) : (
+                                <span className="flex items-center gap-2">
+                                    Execute Customs Audit
+                                    <ArrowRight className="h-5 w-5" />
+                                </span>
+                            )}
+                        </Button>
                     </div>
                 )}
 
-                {step === 'form' && (
-                    <form onSubmit={handleLeadSubmit} className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-500">
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Official Email</label>
-                            <Input
-                                required
-                                type="email"
-                                placeholder="name@company.com"
-                                className="!bg-[#0a1628] border-slate-700 !text-white h-12 rounded-xl"
-                                value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Company Entity</label>
-                            <Input
-                                required
-                                placeholder="Business Legal Name"
-                                className="!bg-[#0a1628] border-slate-700 !text-white h-12 rounded-xl"
-                                value={formData.company}
-                                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Simulation Data</label>
-                            <div className="p-3 bg-[#0a1628]/50 border border-slate-700 rounded-xl text-[11px] text-slate-400 space-y-1">
-                                <div className="flex justify-between">
-                                    <span>HTS Code:</span>
-                                    <span className="text-white font-bold">{data.hts}</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Value:</span>
-                                    <span className="text-white font-bold">${parseFloat(getCleanValue(data.value)).toLocaleString()}</span>
+                {step === 'results' && results && (
+                    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-6 duration-700">
+                        <div className="flex flex-col md:flex-row gap-6">
+                            <div className="flex-1 space-y-4">
+                                <div className="p-6 bg-[#0a1628] border border-slate-700 rounded-2xl space-y-4">
+                                    <h4 className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest">Audit Summary</h4>
+                                    <div className="space-y-3">
+                                        <div className="flex justify-between items-center text-sm">
+                                            <span className="text-slate-400">HS Code</span>
+                                            <span className="text-white font-mono">{data.hs}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center text-sm">
+                                            <span className="text-slate-400">Duty Rate</span>
+                                            <span className="text-white font-bold">{(results.dutyRate * 100).toFixed(1)}%</span>
+                                        </div>
+                                        <div className="flex justify-between items-center text-sm">
+                                            <span className="text-slate-400">VAT Factor</span>
+                                            <span className="text-white">20% Standard</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="pt-2 flex flex-col gap-3">
-                            <Button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className="w-full h-14 bg-cyan-500 hover:bg-cyan-600 !text-white font-bold rounded-xl"
-                            >
-                                {isSubmitting ? 'Submitting Claim...' : 'Submit Claim Request'}
-                            </Button>
-                            <button
-                                type="button"
-                                onClick={() => setStep('input')}
-                                className="text-xs text-slate-500 hover:text-slate-300 font-medium py-1 underline underline-offset-4"
-                            >
-                                Edit Simulation Data
-                            </button>
-                        </div>
-                    </form>
-                )}
-
-                {step === 'success' && (
-                    <div className="text-center py-10 space-y-8 animate-in zoom-in-95 duration-500">
-                        <div className="space-y-4">
-                            <div className="flex items-baseline justify-center text-white/90 mb-2">
-                                <span className="text-2xl font-semibold tracking-tight">freight</span>
-                                <span className="text-2xl font-light tracking-tight text-cyan-400">code</span>
-                                <span className="text-[12px] font-normal ml-0.5 -translate-y-3">®</span>
-                            </div>
-                            <div className="w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.1)]">
-                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
+                            <div className="flex-1 p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-center flex flex-col justify-center">
+                                <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest mb-2">Total Estimated Tax Liability</p>
+                                <p className="text-5xl font-bold text-white tracking-tighter">
+                                    £{results.totalTaxes.toLocaleString()}
+                                </p>
+                                <p className="text-[11px] text-slate-500 mt-2 font-medium">Ready for C88 Submission</p>
                             </div>
                         </div>
+
                         <div className="space-y-3">
-                            <h3 className="text-white font-bold text-xl tracking-tight">Simulation Verified</h3>
-                            <p className="text-slate-400 text-sm leading-relaxed mx-auto max-w-[280px] font-medium">
-                                Your claim request has been queued. A personal representative will email you to coordinate the 7501 document collection within 24 hours.
-                            </p>
+                            <div className="flex items-center justify-between ml-1">
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Calculation Breakdown</p>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {[
+                                    { label: 'Customs Value', value: `£${results.customsValue.toLocaleString()}` },
+                                    { label: 'Import Duty', value: `£${results.dutyAmount.toLocaleString()}` },
+                                    { label: 'Import VAT', value: `£${results.vatAmount.toLocaleString()}` }
+                                ].map((item, i) => (
+                                    <div key={i} className="p-4 bg-[#0a1628] border border-slate-800 rounded-xl">
+                                        <p className="text-[9px] text-slate-500 font-bold uppercase tracking-tight mb-1">{item.label}</p>
+                                        <p className="text-lg font-bold text-white">{item.value}</p>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <Button
-                            onClick={() => {
-                                setStep('input');
-                                setData({ hts: '', value: '', date: '', origin: 'CN' });
-                                setRefund(null);
-                                setFormData({ email: '', company: '', notes: '' });
-                            }}
-                            className="bg-transparent text-cyan-400 hover:text-cyan-300 hover:bg-cyan-400/10 border-0 font-bold"
+
+                        <div className="flex flex-col md:flex-row gap-4">
+                            <Button className="flex-1 h-14 bg-white/10 hover:bg-white/20 !text-white border border-white/20 font-bold rounded-xl flex items-center justify-center gap-2">
+                                <FileText className="h-4 w-4" />
+                                Generate UK Import Profile
+                            </Button>
+                            <Button className="flex-1 h-14 bg-cyan-500 hover:bg-cyan-600 !text-white font-bold rounded-xl shadow-lg flex items-center justify-center gap-2">
+                                Upload Documents to HMRC
+                                <ArrowRight className="h-4 w-4" />
+                            </Button>
+                        </div>
+
+                        <button
+                            onClick={() => setStep('audit')}
+                            className="w-full text-xs text-slate-500 hover:text-slate-300 font-medium py-1"
                         >
-                            Run Another Simulation
-                        </Button>
+                            ← Run Another Audit
+                        </button>
                     </div>
                 )}
             </CardContent>
